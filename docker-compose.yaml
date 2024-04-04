@@ -25,6 +25,8 @@ services:
   akhq:
     image: tchiotludo/akhq
     restart: unless-stopped
+    depends_on:
+      - kafka
     ports:
       - "9000:8080"
     environment:

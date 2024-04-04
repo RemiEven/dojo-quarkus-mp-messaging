@@ -23,5 +23,6 @@
 				"vscjava.vscode-java-pack"
 			]
 		}
-	}
+	},
+	"forwardPorts": [9000]
 }

@@ -1,7 +1,7 @@
 # dojo-quarkus-mp-messaging
 A Quarkus dojo to experiment MicroProfile reactive messaging with Kafka
 
-First, start the Kafka broker using the provided docker compose: 
+First, start the Kafka broker using the provided docker compose:
 
 ```
 docker-compose up
@@ -17,14 +17,14 @@ Then, you will develop an application with three components:
 
 Before going to the various steps of the dojo, please take some time to read the following documentations:
 
-- [Smallrye Reactive Messaging](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2.7/index.html)
-- [Smallrye Reactive Messaging - Concepts](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2.7/concepts.html)
+- [Smallrye Reactive Messaging](https://smallrye.io/smallrye-reactive-messaging/latest/)
+- [Smallrye Reactive Messaging - Concepts](https://smallrye.io/smallrye-reactive-messaging/latest/concepts/concepts/)
 
 You can refer to the Quarkus [USING APACHE KAFKA WITH REACTIVE MESSAGING](https://quarkus.io/guides/kafka) guide at any time.
 
 ## Step 1
 
-For this step, you can refer to the [Sending / Receiving messages from non-reactive code](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2.7/emitter/emitter.html) documentation.
+For this step, you can refer to the [Sending / Receiving messages from non-reactive code](https://smallrye.io/smallrye-reactive-messaging/latest/concepts/emitter/) documentation.
 
 - Go to the [order-api](order-api) and open the `fr.loicmathieu.dojo.quarkus.messaging.order.api.OrderResource` REST endpoint.
 - Define an `Emitter<Order>` configured with the `orders`. This channel is already configured in the `application.properties`.
@@ -32,7 +32,7 @@ For this step, you can refer to the [Sending / Receiving messages from non-react
 
 Start the application with `mvn quarkus:dev`.
 
-You can send orders to the endpoint with this curl: 
+You can send orders to the endpoint with this curl:
 
 ```
 curl -XPOST -d '{"nbItem":2, "totalPrice": 200, "userId": "user1", "shippingAddress": "1 rue du Paradis à Lille"}' \
@@ -46,7 +46,7 @@ NOTE: The user service of the `order-enhancer` is able to handle the users with 
 
 - Go to the [order-enhancer](order-enhancer) and open the `fr.loicmathieu.dojo.quarkus.messaging.order.enhancer.MessageManager`.
 - Create a method that takes an `Order` as parameter and return the `EnhancedOrder` enhanced with the User information recovered from the `UserService`.
-- Annotate this method so it listens to the `orders` channel and send the enhanced order to the `enhanced-orders` channel. 
+- Annotate this method so it listens to the `orders` channel and send the enhanced order to the `enhanced-orders` channel.
 These channels are already configured in the `application.properties`.
 You can read the section [The price converter](https://quarkus.io/guides/kafka#the-price-converter) of the Quarkus Kafka guide for an exemple.
 - Add some logging to see if the message arrives.
@@ -59,7 +59,7 @@ Start the application with `mvn quarkus:dev` and create orders on the order API.
 
  - Open the test class `fr.loicmathieu.dojo.quarkus.messaging.order.enhancer.MessageManagerTest`, run it, it should fail.
  - Open the class `fr.loicmathieu.dojo.quarkus.messaging.order.enhancer.InMemoryChannelTestResource` and mock the channels.
-Check the SmallRye Reactive Messaging [Testing section](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2.7/testing/testing.html) for an example.
+Check the SmallRye Reactive Messaging [Testing section](https://smallrye.io/smallrye-reactive-messaging/latest/concepts/testing/) for an example.
 
 ## Step 4
 

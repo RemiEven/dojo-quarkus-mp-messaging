@@ -11,20 +11,10 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class MessageManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageManager.class);
+
     @Inject UserService userService;
 
-    @Incoming("orders")
-    @Outgoing("enhanced-orders")
-    public EnhancedOrder enhance(Order order){
-        LOGGER.info("Receive order: " + order);
-        EnhancedOrder enhancedOrder = new EnhancedOrder();
-        enhancedOrder.nbItem = order.nbItem;
-        enhancedOrder.shippingAddress = order.shippingAddress;
-        enhancedOrder.totalPrice = order.totalPrice;
-        enhancedOrder.userId = order.userId;
-        User user = userService.getUser(order.userId);
-        enhancedOrder.userFirstName = user.firstName;
-        enhancedOrder.userLastName = user.lastName;
-        return enhancedOrder;
+    // TODO enhance the order using a method that register to the 'orders' channel and send the enhanced order to the 'enhanced-orders' channel
+    // use the userService to get the user and enhance the order with the user info
     }
 }

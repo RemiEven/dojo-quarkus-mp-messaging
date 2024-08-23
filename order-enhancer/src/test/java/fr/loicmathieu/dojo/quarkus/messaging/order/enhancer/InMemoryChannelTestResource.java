@@ -9,8 +9,8 @@ public class InMemoryChannelTestResource implements QuarkusTestResourceLifecycle
 
     @Override
     public Map<String, String> start() {
-        InMemoryConnector.switchIncomingChannelsToInMemory("orders");
-        InMemoryConnector.switchOutgoingChannelsToInMemory("enhanced-orders");
+        // TODO Switch the channels to the in-memory connector
+
         return Map.of();
     }
 
